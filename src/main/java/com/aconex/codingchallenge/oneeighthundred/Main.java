@@ -17,12 +17,13 @@ public class Main {
         Stream<String> input;
 
         if (arguments.inputFiles().isEmpty()) {
-            LOGGER.fine("No input file paths provided.");
+            LOGGER.fine("No input file paths provided");
             LOGGER.info("Please enter the desired phone numbers, one per line.");
-            LOGGER.info("End the input with 'CTRL + D' on an empty line.");
+            LOGGER.info("End the input by typing 'CTRL + D' (Unix) or 'CTRL + Z' + Return (Windows) on an empty line.");
             input = InputFactory.fromStdIn();
         } else {
-            input = Stream.empty();
+            LOGGER.fine("Reading from provided files list");
+            input = InputFactory.fromFiles(arguments.inputFiles());
         }
 
         input.forEach(System.out::println);

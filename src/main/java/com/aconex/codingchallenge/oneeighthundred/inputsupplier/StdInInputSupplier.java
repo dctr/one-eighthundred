@@ -9,6 +9,12 @@ import java.util.stream.Stream;
 class StdInInputSupplier implements InputSupplier {
     private final static Logger LOGGER = Logger.getLogger(StdInInputSupplier.class.getName());
 
+    /*
+     * Scanner(System.in) reads until end of input
+     * and therefor does not provide an asynchronous stream as NIO does.
+     * However as this is (hopefully) not the essential part of the challenge,
+     * I stick with this solution and will focus on the core logic instead.
+     */
     @Override
     public Stream<String> get() {
         Scanner scanner = new Scanner(System.in);

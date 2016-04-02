@@ -16,3 +16,4 @@
     - Debug log -> FINE
     - user info -> INFO
     - Errors -> WARNING
+- No tests for platform wrapper logic (STD IN / FileIO)

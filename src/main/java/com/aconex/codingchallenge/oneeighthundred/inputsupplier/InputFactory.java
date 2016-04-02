@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 public class InputFactory {
 
-    private static Sanitiser sanitiser = new Sanitiser();
+    private static final Sanitiser SANITISER = new Sanitiser();
 
     public static Stream<String> fromStdIn() {
         return fromGeneric(new StdInInputSupplier());
@@ -18,7 +18,7 @@ public class InputFactory {
     private static Stream<String> fromGeneric(InputSupplier supplier) {
         return supplier
                 .get()
-                .map(sanitiser::apply);
+                .map(SANITISER);
     }
 
 }
