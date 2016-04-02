@@ -2,8 +2,10 @@ package com.aconex.codingchallenge.oneeighthundred;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Arguments {
+    private final static Logger LOGGER = Logger.getLogger(Arguments.class.getName());
 
     private final List<String> inputFiles;
     private final String dictionaryPath;
@@ -16,6 +18,7 @@ public class Arguments {
             dictionaryPath = Constants.DEFAULT_DICTIONARY_PATH;
             inputFiles = arguments;
         }
+        LOGGER.fine("Parsed args; dict: " + dictionaryPath() + "; file count: " + inputFiles().size());
     }
 
     public Arguments(String[] arguments) {
