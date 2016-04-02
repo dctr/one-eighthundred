@@ -20,9 +20,11 @@ public class Main {
             LOGGER.fine("No input file paths provided");
             LOGGER.info("Please enter the desired phone numbers, one per line.");
             LOGGER.info("End the input by typing 'CTRL + D' (Unix) or 'CTRL + Z' + Return (Windows) on an empty line.");
+
             input = InputFactory.fromStdIn();
         } else {
             LOGGER.fine("Reading from provided files list");
+
             input = InputFactory.fromFiles(arguments.inputFiles());
         }
 

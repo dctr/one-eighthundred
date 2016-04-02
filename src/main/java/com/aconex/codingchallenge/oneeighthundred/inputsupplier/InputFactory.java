@@ -1,11 +1,12 @@
 package com.aconex.codingchallenge.oneeighthundred.inputsupplier;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class InputFactory {
 
-    private static final Sanitiser SANITISER = new Sanitiser();
+    private static final Sanitiser SANITISER = new NumberSanitiser();
 
     public static Stream<String> fromStdIn() {
         return fromGeneric(new StdInInputSupplier());
@@ -18,7 +19,9 @@ public class InputFactory {
     private static Stream<String> fromGeneric(InputSupplier supplier) {
         return supplier
                 .get()
-                .map(SANITISER);
+                .map(SANITISER)
+                .filter(Optional::isPresent)
+                .map(Optional::get);
     }
 
 }

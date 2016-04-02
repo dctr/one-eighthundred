@@ -1,10 +1,7 @@
 package com.aconex.codingchallenge.oneeighthundred.inputsupplier;
 
-import java.util.function.UnaryOperator;
+import java.util.Optional;
+import java.util.function.Function;
 
-class Sanitiser implements UnaryOperator<String> {
-    @Override
-    public String apply(String s) {
-        return s;
-    }
+interface Sanitiser extends Function<String, Optional<String>> {
 }
