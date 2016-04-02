@@ -1,4 +1,4 @@
-package com.aconex.codingchallenge.oneeighthundred.inputsupplier;
+package com.aconex.codingchallenge.oneeighthundred.input;
 
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 abstract class AbstractSanitiser implements Sanitiser {
 
     private final static Logger LOGGER = Logger.getLogger(AbstractSanitiser.class.getName());
+
     private static final String PUNCTUATION = "\\p{Punct}";
     private static final String WHITESPACE = "\\s";
 

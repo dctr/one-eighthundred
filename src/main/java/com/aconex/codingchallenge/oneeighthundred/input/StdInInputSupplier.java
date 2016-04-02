@@ -1,4 +1,4 @@
-package com.aconex.codingchallenge.oneeighthundred.inputsupplier;
+package com.aconex.codingchallenge.oneeighthundred.input;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.aconex.codingchallenge.oneeighthundred.inputsupplier;
+package com.aconex.codingchallenge.oneeighthundred.input;
 
 import org.junit.Before;
 import org.junit.Test;
