@@ -3,7 +3,7 @@ package com.aconex.codingchallenge.oneeighthundred;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Arguments arguments = new Arguments(args);
     }
 
 }

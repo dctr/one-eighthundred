@@ -7,7 +7,7 @@ One paragraph description.
 Read phone numbers from an input file:
 
 ```sh
-one-eighthundred.jar [-d dictionary.txt] input.txt
+one-eighthundred.jar [-d dictionary.txt] input.txt [input2.txt [input3.txt [...]]]
 ```
 
 Provide phone number through STDIN:
