@@ -8,6 +8,13 @@ class NumberSanitiser extends AbstractSanitiser {
 
     @Override
     public Optional<String> apply(String s) {
-        return wrapOptional(s, super.sanitiseGeneric(s), DIGIT);
+        return wrapOptional(s, removePrefix(super.sanitiseGeneric(s)), DIGIT);
+    }
+
+    private String removePrefix(String s) {
+        if (s.startsWith("1800")) {
+            return s.substring(4);
+        }
+        return s;
     }
 }

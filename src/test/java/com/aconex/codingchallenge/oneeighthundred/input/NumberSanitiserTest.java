@@ -43,6 +43,15 @@ public class NumberSanitiserTest {
     }
 
     @Test
+    public void removesPrefix() throws Exception {
+        String input = "1 800 2255 63";
+        String expected = "225563";
+        Optional<String> actual = sanitiser.apply(input);
+        assertTrue("Input could not be converted", actual.isPresent());
+        assertEquals(expected, actual.get());
+    }
+
+    @Test
     public void doesNotRemoveLetters() throws Exception {
         String input = "2255A63";
         Optional<String> actual = sanitiser.apply(input);
