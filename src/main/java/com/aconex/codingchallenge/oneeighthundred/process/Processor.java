@@ -2,9 +2,11 @@ package com.aconex.codingchallenge.oneeighthundred.process;
 
 import java.util.Set;
 import java.util.function.Function;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class Processor implements Function<String, Set<String>> {
+    private final static Logger LOGGER = Logger.getLogger(Processor.class.getName());
 
     private final Set<String> dictionary;
     private final PotentialWordGenerator potentialWordGenerator;
@@ -18,7 +20,7 @@ public class Processor implements Function<String, Set<String>> {
 
     @Override
     public Set<String> apply(String s) {
-        // USE COMPOSE!
+        LOGGER.fine("Start processing");
         return phoneNumberSplitter.apply(s).stream()
             .flatMap(phoneNumber -> phoneNumber
                     .setWordProcessor(potentialWordGenerator, dictionary)
