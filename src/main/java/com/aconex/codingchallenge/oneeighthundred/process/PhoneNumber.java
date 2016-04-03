@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Data object.
  * Represents a phone number in splitted parts.
  * Parts can either be strings or single digit Integers
  * E.g. {"2255", "63"} or {"123", 4, "56"}
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
  */
 class PhoneNumber {
 
-    private List<Object> phoneNumber;
+    private final List<Object> phoneNumber;
 
     private PhoneNumber(List<Object> parts) {
         this.phoneNumber = new ArrayList<>();

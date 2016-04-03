@@ -2,7 +2,6 @@ package com.aconex.codingchallenge.oneeighthundred;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Parses and provides that arguments that can be provided to this program.

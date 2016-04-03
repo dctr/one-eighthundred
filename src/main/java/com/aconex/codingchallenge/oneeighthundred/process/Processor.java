@@ -30,7 +30,7 @@ public class Processor implements Function<String, Set<String>> {
      */
     @Override
     public Set<String> apply(String number) {
-        return phoneNumberSplitter.apply(number).stream()
+        return phoneNumberSplitter.apply(number)
                 .flatMap(this::getWordNumbers)
                 .collect(Collectors.toSet());
 
@@ -58,7 +58,7 @@ public class Processor implements Function<String, Set<String>> {
     private Set<String> getWordsForPart(Object numberPart) {
         Set<String> result;
         if (numberPart instanceof String) {
-            result = potentialWordGenerator.apply((String) numberPart).stream()
+            result = potentialWordGenerator.apply((String) numberPart)
                     .filter(dictionary::contains)
                     .collect(Collectors.toSet());
         } else if (numberPart instanceof Integer) {

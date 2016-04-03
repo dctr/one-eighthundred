@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,7 +25,7 @@ public class PotentialWordGeneratorTest {
         expected.add("A");
         expected.add("B");
         expected.add("C");
-        Set<String> actual = generator.apply(input);
+        Set<String> actual = generator.apply(input).collect(Collectors.toSet());
         assertEquals(expected, actual);
     }
 
@@ -41,7 +42,7 @@ public class PotentialWordGeneratorTest {
         expected.add("CA");
         expected.add("CB");
         expected.add("CC");
-        Set<String> actual = generator.apply(input);
+        Set<String> actual = generator.apply(input).collect(Collectors.toSet());
         assertEquals(expected, actual);
     }
 

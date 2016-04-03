@@ -1,33 +1,47 @@
-# Why this challenge
+# Explanation of choice, design and approach
 
-At a first reading of both provided challenges (1-800 and Vehicle Survey),
-it seemed to me the 1-800 challenge was a little more clearly defined.
+## Why this challenge
+
+First, at reading of both provided challenges (1-800 and Vehicle Survey),
+the 1-800 challenge seemed a little more clearly defined to me.
 Second, while reading the 1-800 challenge, a first design approach came to my mind.
 
-# Design and approach
+## Design and approach
 
-I chose a basic IPO (Input-Process-Output) approach relying on sets and streams.
-The input part is also responsible for sanitising the input.
-The process part does all transformations.
+### Approach
+
+I chose a basic IPO (Input-Process-Output) approach where each number
+represents an element in the stream pipeline that is composed of the various
+input, processing and output stages. This approach suggested itself,
+as each element can go through the pipeline individually. It should also facilitate
+a functional programming style, as you mentioned functional programming,
+Scala and Clojure on your web site's job descriptions.
+
+### Design
+
+The input part is responsible for reading from various sources and sanitising the input.
+The process part does all transformations, e.g. splitting of numbers and lookup of words.
+
+While the input is a stream of elements travelling individually through the pipeline,
+the dictionary is a static single set. This was an obvious design decision
+as it has to be present for all elements throughout the program's run time.
 
 To demonstrate different skills, I used (amongst others):
 
-- The streaming API (as you mention Scala and Clojure in your job descriptions)
+- The streaming API (again, as you mention FP, Scala and Clojure)
 - OOP based class layout
 - Recursion (in PhoneNumberSplitter)
 
-The users input is represented as stream of things,
-as each element of it can go separately through the IPO pipeline.
-The dictionary however is represented as set,
-as it has to be present in whole and throughout the program for every input element.
+### Design Decisions
 
-## Design Decisions
-
-To keep the code concise for the matters of this challenge, I made the following design decisions:
+To keep the code concise for the matters of this challenge, 
+I made the following design decisions:
 
 - Few fault checks
     - Dictionary path option has to be first argument
     - `args` parameter to main() is always an array, so no null-check
+- Null-Object return values
+  (invalid input results in an empty optional, set or stream instead of an exception).
 - Use java.util.Logger instead of slf4j + log4j 2 because no frameworks were allowed
 - All output via logger instead of finer-grained solution
     - Debug log -> FINE

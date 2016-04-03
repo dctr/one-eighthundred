@@ -3,8 +3,9 @@ package com.aconex.codingchallenge.oneeighthundred.process;
 import java.util.*;
 import java.util.function.Function;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
-class PotentialWordGenerator implements Function<String, Set<String>> {
+class PotentialWordGenerator implements Function<String, Stream<String>> {
     private final static Logger LOGGER = Logger.getLogger(PotentialWordGenerator.class.getName());
 
     private static final String REPLACEABLE_NUMBERS = "[2-9]+";
@@ -33,13 +34,13 @@ class PotentialWordGenerator implements Function<String, Set<String>> {
      * @return A set of potential words or an empty set if input invalid.
      */
     @Override
-    public Set<String> apply(String number) {
+    public Stream<String> apply(String number) {
         if (!number.matches(REPLACEABLE_NUMBERS)) {
             LOGGER.warning("Invalid input for keypad: " + number);
-            return Collections.emptySet();
+            return Stream.empty();
         }
 
-        return replaceNumbers(number);
+        return replaceNumbers(number).stream();
     }
 
     private Set<String> replaceNumbers(String number) {

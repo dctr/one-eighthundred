@@ -1,8 +1,9 @@
 # 1-800-CODING-CHALLENGE
 
 Map a list of phone numbers to a list of words that can be made out of them using a keypad.
-
 `2255.63` will e.g. output (amongst others) "CALL-ME", `435 5696 753` will output "HELLO-WORLD". 
+
+The explanation of choice, design and approach can be found in the `EXPLANATION.md` file.
 
 ## Example usage
 

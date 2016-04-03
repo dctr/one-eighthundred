@@ -3,17 +3,19 @@ package com.aconex.codingchallenge.oneeighthundred.process;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
-class PhoneNumberSplitter implements Function<String, Set<PhoneNumber>> {
+class PhoneNumberSplitter implements Function<String, Stream<PhoneNumber>> {
 
     /**
      * Splits a phone number into parts adhering to the rules defined in the challenge
+     *
      * @param number The number as a single, sanitised string of digits.
      * @return A set of all possible splittings as defined by the rules of the challenge.
      */
     @Override
-    public Set<PhoneNumber> apply(String number) {
-        return splitPhoneNumberFirstRun(number);
+    public Stream<PhoneNumber> apply(String number) {
+        return splitPhoneNumberFirstRun(number).stream();
     }
 
     /*
