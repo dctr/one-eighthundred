@@ -2,9 +2,10 @@ package com.aconex.codingchallenge.oneeighthundred.process;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Stream;
+import java.util.logging.Logger;
 
 class PotentialWordGenerator implements Function<String, Set<String>> {
+    private final static Logger LOGGER = Logger.getLogger(PotentialWordGenerator.class.getName());
 
     private static final String REPLACEABLE_NUMBERS = "[2-9]+";
     private static final Map<Character, Set<Character>> KEYPAD = new HashMap<>();
@@ -20,12 +21,28 @@ class PotentialWordGenerator implements Function<String, Set<String>> {
         KEYPAD.put('9', new HashSet<>(Arrays.asList('W', 'X', 'Y', 'Z')));
     }
 
+    /**
+     * Delivers a set of letter combinations (aka "potential words"),
+     * that can be composed of the numbers using a keypad.
+     * These potential words still have to be validated against a dictionary!
+     * Note: If the input contains invalid characters,
+     * meaning characters other than 2-9 which represent the keypad,
+     * the result is an empty set.
+     *
+     * @param number A string of digits to use on the virtual keypad
+     * @return A set of potential words or an empty set if input invalid.
+     */
     @Override
     public Set<String> apply(String number) {
         if (!number.matches(REPLACEABLE_NUMBERS)) {
+            LOGGER.warning("Invalid input for keypad: " + number);
             return Collections.emptySet();
         }
 
+        return replaceNumbers(number);
+    }
+
+    private Set<String> replaceNumbers(String number) {
         Set<String> potentialWords = new HashSet<>(Collections.singletonList(""));
         for (char digit : number.toCharArray()) {
             Set<String> newPotentialWords = new HashSet<>();

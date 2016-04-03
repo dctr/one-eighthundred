@@ -6,17 +6,20 @@ import java.util.function.Function;
 
 class PhoneNumberSplitter implements Function<String, Set<PhoneNumber>> {
 
-    // Minimum word length = 1, aka "a"
-    // At most 1 digit in between, 1800 number length = 6
-    // => maximum number of 6 words (a a a a a a)
-    // => maximum number of digits = minimum word length / 2, aka every other (a 1 a 1 a 1)
-
+    /**
+     * Splits a phone number into parts adhering to the rules defined in the challenge
+     * @param number The number as a single, sanitised string of digits.
+     * @return A set of all possible splittings as defined by the rules of the challenge.
+     */
     @Override
     public Set<PhoneNumber> apply(String number) {
         return splitPhoneNumberFirstRun(number);
     }
 
-    // For the first run we have to consider, that the digit might also be at first and/or last position.
+    /*
+     * The inner splitting logic in splitPhoneNumber only considers digits in the middle.
+     * This first run considers, that the digits also can be the first or the last part.
+     */
     private Set<PhoneNumber> splitPhoneNumberFirstRun(String number) {
         Set<PhoneNumber> result = new HashSet<>();
 
@@ -34,6 +37,11 @@ class PhoneNumberSplitter implements Function<String, Set<PhoneNumber>> {
         return result;
     }
 
+    /*
+     * A valid split inside the number goes as follows:
+     * number => wholeNumber | firstHalf - secondHalf | firstHalf - middleDigit - secondHalf
+     * Recursively calls itself with the split parts.
+     */
     private Set<PhoneNumber> splitPhoneNumber(String number) {
         Set<PhoneNumber> result = new HashSet<>();
 
@@ -46,8 +54,6 @@ class PhoneNumberSplitter implements Function<String, Set<PhoneNumber>> {
         if (number.length() == 1) {
             return result;
         }
-
-        // => wholeNumber | firstHalf - secondHalf | firstHalf - middleDigit - secondHalf
 
         for (int split = 1; split < number.length(); split++) {
             String leftString = number.substring(0, split);

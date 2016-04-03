@@ -1,17 +1,22 @@
 package com.aconex.codingchallenge.oneeighthundred.process;
 
-import java.util.*;
-import java.util.logging.Logger;
+import com.aconex.codingchallenge.oneeighthundred.Constants;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a phone number in splitted parts.
+ * Parts can either be strings or single digit Integers
+ * E.g. {"2255", "63"} or {"123", 4, "56"}
+ * Note: {"1", "2"} != {"12"} != {1, "2"} != {"1", 2}
+ */
 class PhoneNumber {
-    private final static Logger LOGGER = Logger.getLogger(PhoneNumber.class.getName());
-
-    private static final String SEPARATOR = "-";
 
     private List<Object> phoneNumber;
-    private Set<String> dictionary;
-    private PotentialWordGenerator generator;
 
     private PhoneNumber(List<Object> parts) {
         this.phoneNumber = new ArrayList<>();
@@ -26,56 +31,18 @@ class PhoneNumber {
         this(Collections.singletonList(number));
     }
 
-    PhoneNumber setWordProcessor(PotentialWordGenerator generator, Set<String> dictionary) {
-        this.generator = generator;
-        this.dictionary = dictionary;
-        return this;
-    }
-
-    Set<String> getWordNumbers() {
-
-        Set<String> potentialWords = new HashSet<>(Collections.singletonList(""));
-        for (Object numberPart : phoneNumber) {
-            Set<String> potentialWordsNew = new HashSet<>();
-            Set<String> wordParts = getWordsForPart(numberPart);
-            for (String potentialWord : potentialWords) {
-                for (String wordPart : wordParts) {
-                    potentialWordsNew.add(potentialWord +
-                            (potentialWord.length() > 0 ? SEPARATOR : "") +
-                            wordPart);
-                }
-            }
-            potentialWords = potentialWordsNew;
-        }
-
-        return potentialWords;
-    }
-
-    private Set<String> getWordsForPart(Object numberPart) {
-        Set<String> result;
-        if (numberPart instanceof String) {
-            result = generator.apply((String) numberPart).stream()
-                    .filter(dictionary::contains)
-                    .collect(Collectors.toSet());
-        } else if (numberPart instanceof Integer) {
-            result = new HashSet<>(Collections.singletonList(numberPart.toString()));
-            return result;
-        } else {
-            System.err.println("aaaaaaaaaaaaaaaaaaaaa");
-            result = Collections.emptySet();
-        }
-        LOGGER.fine(numberPart + " -> " + result);
-        return result;
-    }
-
     private void addPart(Object part) {
         if (part instanceof PhoneNumber) {
             this.phoneNumber.addAll(((PhoneNumber) part).phoneNumber);
         } else if ((part instanceof String) || (part instanceof Integer)) {
             this.phoneNumber.add(part);
         } else {
-            throw new IllegalArgumentException("Unsupported list element type: " + part.getClass());
+            throw new IllegalArgumentException("Unsupported phone number part type: " + part.getClass());
         }
+    }
+
+    List<Object> getParts() {
+        return this.phoneNumber;
     }
 
     @Override
@@ -104,6 +71,6 @@ class PhoneNumber {
                         throw new UnsupportedOperationException("This should never happen: " + o.getClass());
                     }
                 })
-                .collect(Collectors.joining(SEPARATOR));
+                .collect(Collectors.joining(Constants.SEPARATOR));
     }
 }

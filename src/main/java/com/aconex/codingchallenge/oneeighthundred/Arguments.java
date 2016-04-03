@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Parses and provides that arguments that can be provided to this program.
+ */
 class Arguments {
-    private final static Logger LOGGER = Logger.getLogger(Arguments.class.getName());
 
     private final List<String> inputFiles;
     private final String dictionaryPath;
@@ -18,7 +20,6 @@ class Arguments {
             dictionaryPath = Constants.DEFAULT_DICTIONARY_PATH;
             inputFiles = arguments;
         }
-        LOGGER.fine("Parsed args; dict: " + dictionaryPath() + "; file count: " + inputFiles().size());
     }
 
     Arguments(String[] arguments) {

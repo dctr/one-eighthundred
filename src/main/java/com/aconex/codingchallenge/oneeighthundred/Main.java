@@ -18,22 +18,27 @@ public class Main {
         setUpLogging();
         Arguments arguments = new Arguments(args);
         Set<String> dictionary = getDictionary(arguments);
-        Stream<String> inputs = getInput(arguments);
+        Stream<String> input = getInput(arguments);
         Processor processor = new Processor(dictionary);
-        printOutput(inputs, processor);
+        Map<String, Set<String>> processedInput = processInput(input, processor);
+        printOutput(processedInput);
     }
 
-    private static void printOutput(Stream<String> inputs, Processor processor) {
-        inputs
+    private static Map<String, Set<String>> processInput(Stream<String> inputs, Processor processor) {
+        return inputs
                 .map(input -> new AbstractMap.SimpleEntry<>(input, processor.apply(input)))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
-                .forEach((s, strings) -> {
-                    if (strings.isEmpty()) {
-                        return;
-                    }
-                    System.out.println(s + ":");
-                    strings.forEach(s1 -> System.out.println("    " + s1));
-                });
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    private static void printOutput(Map<String, Set<String>> processedInput) {
+        processedInput.forEach((number, wordsNumbers) -> {
+            if (wordsNumbers.isEmpty()) {
+                return;
+            }
+            String output = number + ":" + wordsNumbers.stream()
+                    .collect(Collectors.joining("\n    "));
+            LOGGER.info(output);
+        });
     }
 
     private static Stream<String> getInput(Arguments arguments) {

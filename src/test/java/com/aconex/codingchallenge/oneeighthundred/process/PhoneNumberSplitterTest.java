@@ -43,7 +43,7 @@ public class PhoneNumberSplitterTest {
         System.out.println(actual);
         assertTrue(actual.contains(new PhoneNumber("2255", "63")));
     }
-//
+
 //    @Test
 //    public void splitFourDigits() throws Exception {
 //        String input = "2222";
