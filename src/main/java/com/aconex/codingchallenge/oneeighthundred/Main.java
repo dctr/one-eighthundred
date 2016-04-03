@@ -4,7 +4,6 @@ import com.aconex.codingchallenge.oneeighthundred.input.InputFactory;
 import com.aconex.codingchallenge.oneeighthundred.process.Processor;
 
 import java.util.AbstractMap;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -20,16 +19,19 @@ public class Main {
 
         Arguments arguments = new Arguments(args);
         Set<String> dictionary = getDictionary(arguments);
-        Stream<String> input = getInput(arguments);
+        Stream<String> inputs = getInput(arguments);
         Processor processor = new Processor(dictionary);
 
-        input
-            .map(s -> new AbstractMap.SimpleEntry<>(s, processor.apply(s)))
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
-            .forEach((s, strings) -> {
-                System.out.println(s + ":");
-                strings.forEach(s1 -> System.out.println("    " + s1));
-            });
+        inputs
+                .map(input -> new AbstractMap.SimpleEntry<>(input, processor.apply(input)))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+                .forEach((s, strings) -> {
+                    if (strings.isEmpty()) {
+                        return;
+                    }
+                    System.out.println(s + ":");
+                    strings.forEach(s1 -> System.out.println("    " + s1));
+                });
     }
 
     private static Stream<String> getInput(Arguments arguments) {

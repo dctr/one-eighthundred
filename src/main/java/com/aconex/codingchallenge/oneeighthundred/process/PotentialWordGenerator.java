@@ -2,8 +2,9 @@ package com.aconex.codingchallenge.oneeighthundred.process;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
-public class PotentialWordGenerator implements Function<String, Set<String>> {
+class PotentialWordGenerator implements Function<String, Set<String>> {
 
     private static final String REPLACEABLE_NUMBERS = "[2-9]+";
     private static final Map<Character, Set<Character>> KEYPAD = new HashMap<>();

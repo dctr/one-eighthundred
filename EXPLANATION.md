@@ -19,3 +19,4 @@
 - No tests for platform wrapper logic (STD IN / FileIO)
 - Input as Stream as each item is processed through a pipeline
 - Dictionary as Set, as it is accessed for each steamed item and only should contain unique items
+- Implementing Stream<> everywhere, but is not async, as I am not yet skilled in CompleteableFuture
