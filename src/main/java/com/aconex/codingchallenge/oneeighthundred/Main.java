@@ -11,6 +11,10 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * 1-800-CODING-CHALLENGE
+ * For description and purpose read the challenge's spec.
+ */
 public class Main {
     private final static Logger LOGGER = Logger.getLogger(Main.class.getName());
 
