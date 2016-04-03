@@ -11,6 +11,7 @@ abstract class AbstractSanitiser implements Sanitiser {
     private static final String WHITESPACE = "\\s";
 
     String sanitiseGeneric(String s) {
+        // All sanitisers should remove punctuation and whitespace, according to challenge.
         return s.replaceAll(PUNCTUATION, "").replaceAll(WHITESPACE, "");
     }
 

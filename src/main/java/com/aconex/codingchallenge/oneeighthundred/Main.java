@@ -16,12 +16,14 @@ public class Main {
 
     public static void main(String[] args) {
         setUpLogging();
-
         Arguments arguments = new Arguments(args);
         Set<String> dictionary = getDictionary(arguments);
         Stream<String> inputs = getInput(arguments);
         Processor processor = new Processor(dictionary);
+        printOutput(inputs, processor);
+    }
 
+    private static void printOutput(Stream<String> inputs, Processor processor) {
         inputs
                 .map(input -> new AbstractMap.SimpleEntry<>(input, processor.apply(input)))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
@@ -37,13 +39,10 @@ public class Main {
     private static Stream<String> getInput(Arguments arguments) {
         Stream<String> input;
         if (arguments.inputFiles().isEmpty()) {
-            LOGGER.fine("No input file paths provided");
             LOGGER.info("Please enter the desired phone numbers, one per line.");
             LOGGER.info("End the input by typing 'CTRL + D' (Unix) or 'CTRL + Z' + Return (Windows) on an empty line.");
             input = InputFactory.numbersFromStdIn();
         } else {
-            LOGGER.fine("Reading from provided files list");
-
             input = InputFactory.numbersFromFiles(arguments.inputFiles());
         }
         return input;

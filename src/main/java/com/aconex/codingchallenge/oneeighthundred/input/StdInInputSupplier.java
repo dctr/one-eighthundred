@@ -7,13 +7,12 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 class StdInInputSupplier implements InputSupplier {
-    private final static Logger LOGGER = Logger.getLogger(StdInInputSupplier.class.getName());
-
     /*
      * Scanner(System.in) reads until input is complete
-     * and therefore does not provide an asynchronous stream as NIO does for files.
-     * However as this is (hopefully) not the essential part of the challenge,
-     * I stick with this solution and will focus on the core logic instead.
+     * and therefore does not provide an asynchronous stream as NIO does for files,
+     * which I used in FileInputSupplier.
+     * However as this is (hopefully) not an essential part of the challenge,
+     * I stick with this solution.
      */
     @Override
     public Stream<String> get() {
