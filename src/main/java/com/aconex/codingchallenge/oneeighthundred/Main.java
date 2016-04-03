@@ -39,8 +39,8 @@ public class Main {
             if (wordsNumbers.isEmpty()) {
                 return;
             }
-            String output = number + ":" + wordsNumbers.stream()
-                    .collect(Collectors.joining("\n    "));
+            String output = "\n# " + number + ":\n  " + wordsNumbers.stream()
+                    .collect(Collectors.joining("\n  "));
             LOGGER.info(output);
         });
     }

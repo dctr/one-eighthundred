@@ -40,7 +40,6 @@ public class PhoneNumberSplitterTest {
     public void containsChallengeInput() throws Exception {
         String input = "225563";
         Set<PhoneNumber> actual = splitter.apply(input);
-        System.out.println(actual);
         assertTrue(actual.contains(new PhoneNumber("2255", "63")));
     }
 
