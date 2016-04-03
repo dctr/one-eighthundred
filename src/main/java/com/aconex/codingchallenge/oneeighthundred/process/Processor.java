@@ -1,9 +1,8 @@
 package com.aconex.codingchallenge.oneeighthundred.process;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Processor implements Function<String, Set<String>> {
 
@@ -15,9 +14,16 @@ public class Processor implements Function<String, Set<String>> {
 
     @Override
     public Set<String> apply(String s) {
-        Set<String> result = new HashSet<>();
-        result.add("dummy1");
-        result.add("dummy2");
+        // USE COMPOSE!
+        return new PotentialWordGenerator().apply(s).stream()
+                .filter(dictionary::contains)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<Set<String>> numberToSetOfLetters(String s) {
+        Set<Set<String>> result = new HashSet<>();
+//        result.add(numberToPotentialWords(s));
         return result;
     }
+
 }
